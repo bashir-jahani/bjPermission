@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">bjPermisson</string>
+    <string name="title_Permission">Permission Needed!</string>
 </resources>
