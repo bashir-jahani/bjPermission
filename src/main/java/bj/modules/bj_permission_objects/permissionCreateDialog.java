@@ -27,20 +27,20 @@ public class permissionCreateDialog extends AppCompatActivity {
 	private static String permissionNeeded,  permissionNeedDescription;
 	private static Context context;
 	private TextView TXVTitle;
-	public static GetPermissionListener _getPermissionListener;
+	public static OnGetPermissionListener _getPermissionListener;
 	public static String TitleSet;
 	private static int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
-	public static boolean openMe(Context context, String PermissionNeeded, String PermissionNeedDescription, GetPermissionListener getPermissionListener){
+	public static boolean openMe(Context context, String PermissionNeeded, String PermissionNeedDescription, OnGetPermissionListener getPermissionListener){
 		TitleSet=context.getResources().getString(R.string.title_Permission);
 
 			if (!HavePermission(context,PermissionNeeded)) {
-				permissionNeeded = PermissionNeeded;
-				permissionNeedDescription = PermissionNeedDescription;
+				permissionCreateDialog.	permissionNeeded = PermissionNeeded;
+				permissionCreateDialog.permissionNeedDescription = PermissionNeedDescription;
 				permissionCreateDialog.context = context;
-				_getPermissionListener=getPermissionListener;
+				permissionCreateDialog._getPermissionListener=getPermissionListener;
 				Random r = new Random();
-				MY_PERMISSIONS_REQUEST_READ_CONTACTS= r.nextInt(100) + 10;
+				permissionCreateDialog.MY_PERMISSIONS_REQUEST_READ_CONTACTS= r.nextInt(100) + 10;
 
 				Intent intent = new Intent(context, permissionCreateDialog.class);
 				context.startActivity(intent);
@@ -61,7 +61,7 @@ public class permissionCreateDialog extends AppCompatActivity {
 		setContentView(R.layout.activity_permission_create_dialog);
 
 		TXVPermission=findViewById(R.id.APCDTXVPermission);
-		TXVPermissionDSC=findViewById(R.id.APCDTXVPermission);
+		TXVPermissionDSC=findViewById(R.id.APCDTXVPermissionDescription);
 		TXVTitle=findViewById(R.id.APCDTXVTitle);
 		BTNNo=findViewById(R.id.APCDBTNNo);
 		BTNYes=findViewById(R.id.APCDBTNYes);

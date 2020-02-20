@@ -18,7 +18,7 @@ import static bj.modules.bj_messageBox.BJMessagesButtonKind.*;
 import static bj.modules.bj_messageBox.MessageBox;
 
 public class bj_permission {
-	public interface GetPermissionListener{
+	public interface OnGetPermissionListener {
 		void onPermissionProcesComplated(String PermissionNeeded, Boolean HavePermission);
 	}
 	public static boolean HavePermission(Context context, String PermissionNeeded){
@@ -34,14 +34,14 @@ public class bj_permission {
 		}
 	}
 
-	public static boolean CheckPermision(Context context, String PermissionNeeded,String   PermissionNeedDescription,GetPermissionListener getPermissionListener){
+	public static boolean CheckPermision(Context context, String PermissionNeeded, String   PermissionNeedDescription, OnGetPermissionListener getPermissionListener){
 		return permissionCreateDialog.openMe(context,PermissionNeeded,PermissionNeedDescription,getPermissionListener);
 	}
-	public static boolean CheckPermision(Context context, String PermissionNeeded, @StringRes int PermissionNeedDescriptionResourseID, GetPermissionListener getPermissionListener){
+	public static boolean CheckPermision(Context context, String PermissionNeeded, @StringRes int PermissionNeedDescriptionResourseID, OnGetPermissionListener getPermissionListener){
 		return permissionCreateDialog.openMe(context,PermissionNeeded,context.getResources().getString(PermissionNeedDescriptionResourseID),getPermissionListener);
 	}
 
-	public static void GetPermissions(Context context, final Activity activety, final String PermissionNeeded, @StringRes int PermissionNeedDescriptionResourseID, final Boolean WaitUntil, GetPermissionListener getPermissionListener)
+	public static void GetPermissions(Context context, final Activity activety, final String PermissionNeeded, @StringRes int PermissionNeedDescriptionResourseID, final Boolean WaitUntil, OnGetPermissionListener getPermissionListener)
 	{
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
 				&& PermissionNeeded != null) {
