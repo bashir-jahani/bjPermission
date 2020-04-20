@@ -35,9 +35,11 @@ public class bj_permission {
 	}
 
 	public static boolean CheckPermision(Context context, String PermissionNeeded, String   PermissionNeedDescription, OnGetPermissionListener getPermissionListener){
+		Log.e("bj_permission: CheckPermision#1","Class Name: " + context.getClass().getName());
 		return permissionCreateDialog.openMe(context,PermissionNeeded,PermissionNeedDescription,getPermissionListener);
 	}
 	public static boolean CheckPermision(Context context, String PermissionNeeded, @StringRes int PermissionNeedDescriptionResourseID, OnGetPermissionListener getPermissionListener){
+		//Log.e("bj_permission: CheckPermision#2","Class Name: " + context.getClass().getName());
 		return permissionCreateDialog.openMe(context,PermissionNeeded,context.getResources().getString(PermissionNeedDescriptionResourseID),getPermissionListener);
 	}
 
@@ -50,7 +52,7 @@ public class bj_permission {
 			if (checkSelfPermission(context, PermissionNeeded) != PackageManager.PERMISSION_GRANTED) {
 
 				if (WaitUntil) {
-					Log.e("GGN","Cant wait for permission");
+					Log.e("bj modules","Cant wait for permission");
 					try{
 
 						MessageBox(R.string.title_Permission,PermissionNeedDescriptionResourseID,Yes_No,context,new messageBox.OnDialogResultListener(){
@@ -60,7 +62,7 @@ public class bj_permission {
 									try{
 										requestPermissions(activety, new String[]{PermissionNeeded}, 1);
 									}catch (Exception e1){
-										Log.e("GGN","Permision Error 11:"+ e1.getMessage());
+										Log.e("bj modules","Permision Error 11:"+ e1.getMessage());
 									}
 									return true;
 								}else {
@@ -70,7 +72,7 @@ public class bj_permission {
 							}
 						});
 					}catch (Exception e){
-						Log.e("GGN","Permision Error 1:"+ e.getMessage());
+						Log.e("bj modules","Permision Error 1:"+ e.getMessage());
 					}
 
 				}else {
@@ -82,7 +84,7 @@ public class bj_permission {
 									try{
 										requestPermissions(activety, new String[]{PermissionNeeded}, 1);
 									}catch (Exception e1){
-										Log.e("GGN","Permision Error 22:"+ e1.getMessage());
+										Log.e("bj modules","Permision Error 22:"+ e1.getMessage());
 									}
 
 									return true;
@@ -93,7 +95,7 @@ public class bj_permission {
 							}
 						});
 					}catch (Exception e){
-						Log.e("GGN","Permision Error 2:"+ e.getMessage());
+						Log.e("bj modules","Permision Error 2:"+ e.getMessage());
 					}
 				}
 
@@ -108,7 +110,7 @@ public class bj_permission {
 				&& PermissionNeeded != null) {
 			if (checkSelfPermission(context, PermissionNeeded) != PackageManager.PERMISSION_GRANTED) {
 				if (WaitUntil) {
-					Log.e("GGN","Cant wait for permission");
+					Log.e("bj modules","Cant wait for permission");
 					try{
 						MessageBox(context.getResources().getString(R.string.title_Permission),PermissionNeedDescription, Yes_No,context,new messageBox.OnDialogResultListener(){
 							@Override
