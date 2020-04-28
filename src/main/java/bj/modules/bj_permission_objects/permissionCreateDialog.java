@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import java.util.Random;
 import bj.modules.bj_permission.*;
 import bj.modules.bj_permisson.R;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static bj.modules.bj_permission.*;
 
 public class permissionCreateDialog extends AppCompatActivity {
@@ -43,6 +45,7 @@ public class permissionCreateDialog extends AppCompatActivity {
 				permissionCreateDialog.MY_PERMISSIONS_REQUEST_READ_CONTACTS= r.nextInt(100) + 10;
 
 				Intent intent = new Intent(context, permissionCreateDialog.class);
+				intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
 				context.startActivity(intent);
 
 				return false;
@@ -75,6 +78,7 @@ public class permissionCreateDialog extends AppCompatActivity {
 
 				finish();
 				Log.i("*************************","_getPermissionListener is nul: "+(_getPermissionListener==null));
+				Toast.makeText(permissionCreateDialog.this, "The permission was rejected: "+permissionNeeded, Toast.LENGTH_SHORT).show();
 				if (_getPermissionListener!=null){
 					_getPermissionListener.onPermissionProcesComplated(permissionNeeded, HavePermission(context,permissionNeeded));
 				}
@@ -83,6 +87,7 @@ public class permissionCreateDialog extends AppCompatActivity {
 		BTNYes.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				Toast.makeText(permissionCreateDialog.this, "Get permission action was taken: "+permissionNeeded, Toast.LENGTH_SHORT).show();
 				ActivityCompat.requestPermissions(permissionCreateDialog.this,
 						new String[]{permissionNeeded},
 						MY_PERMISSIONS_REQUEST_READ_CONTACTS);
