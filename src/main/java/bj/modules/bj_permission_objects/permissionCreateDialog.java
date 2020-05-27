@@ -24,6 +24,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static bj.modules.bj_permission.*;
 
 public class permissionCreateDialog extends AppCompatActivity {
+	private static String TAG="permissionCreateDialog";
 	TextView TXVPermission,TXVPermissionDSC;
 	Button BTNYes,BTNNo;
 	private static String permissionNeeded,  permissionNeedDescription;
@@ -32,10 +33,10 @@ public class permissionCreateDialog extends AppCompatActivity {
 	public static OnGetPermissionListener _getPermissionListener;
 	public static String TitleSet;
 	private static int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
-
+	private static final  boolean showInfo=false;
 	public static boolean openMe(Context context, String PermissionNeeded, String PermissionNeedDescription, OnGetPermissionListener getPermissionListener){
 		TitleSet=context.getResources().getString(R.string.title_Permission);
-
+		if (showInfo)  Log.i(TAG, "openMe: PermissionNeeded: "+PermissionNeeded+" have: "+HavePermission(context,PermissionNeeded));
 			if (!HavePermission(context,PermissionNeeded)) {
 				permissionCreateDialog.	permissionNeeded = PermissionNeeded;
 				permissionCreateDialog.permissionNeedDescription = PermissionNeedDescription;
@@ -77,7 +78,7 @@ public class permissionCreateDialog extends AppCompatActivity {
 			public void onClick(View view) {
 
 				finish();
-				Log.i("*************************","_getPermissionListener is nul: "+(_getPermissionListener==null));
+				if (showInfo)  Log.i("*************************","_getPermissionListener is nul: "+(_getPermissionListener==null));
 				Toast.makeText(permissionCreateDialog.this, "The permission was rejected: "+permissionNeeded, Toast.LENGTH_SHORT).show();
 				if (_getPermissionListener!=null){
 					_getPermissionListener.onPermissionProcesComplated(permissionNeeded, HavePermission(context,permissionNeeded));
